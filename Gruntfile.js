@@ -45,11 +45,22 @@ module.exports = function(grunt) {
           style: 'nested',
         }
       },
+    },
+    scsslint: {
+      allFiles: [
+        'stylesheets/**/*.scss',
+      ],
+      options: {
+        bundleExec: false,
+        reporterOutput: 'scss-lint-report.xml',
+        colorizeOutput: true
+      },
     }
   });
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.registerTask('test', ['sass', 'clean', 'jasmine']);
+  grunt.loadNpmTasks('grunt-scss-lint');
+  grunt.registerTask('test', ['scsslint', 'sass', 'clean', 'jasmine']);
   grunt.registerTask('default', ['test']);
 };
